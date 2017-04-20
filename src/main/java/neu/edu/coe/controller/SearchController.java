@@ -1,33 +1,22 @@
 package neu.edu.coe.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
-import neu.edu.coe.dao.AddressDao;
-import neu.edu.coe.dao.CartDao;
-import neu.edu.coe.dao.CategoryDao;
-import neu.edu.coe.dao.CommentDao;
-import neu.edu.coe.dao.OrderDao;
-import neu.edu.coe.dao.OrderItemDao;
+
 import neu.edu.coe.dao.ProductDao;
 import neu.edu.coe.dao.SmellDao;
 import neu.edu.coe.dao.UserDao;
-import neu.edu.coe.model.Page;
-import neu.edu.coe.model.Product;
+
 import neu.edu.coe.model.User;
-import neu.edu.coe.service.CategoryService;
 
 @Controller
 public class SearchController {

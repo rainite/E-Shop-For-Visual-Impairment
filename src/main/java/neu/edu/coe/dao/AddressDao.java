@@ -28,7 +28,7 @@ public class AddressDao extends DAO {
 		System.out.println("delete address called");
 		begin();
 		getSession()
-			.createQuery("delete Address" +
+			.createQuery("delete Address " +
 					"where addressid =:addressid")
 			.setParameter("aiaddressidd", address.getAddressid())
 			.executeUpdate();

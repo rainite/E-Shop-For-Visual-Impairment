@@ -27,7 +27,7 @@ public class CartDao extends DAO{
 		System.out.println("delete Cart called");
 		begin();
 		getSession()
-			.createQuery("delete Cart" +
+			.createQuery("delete Cart " +
 					"where pid =:pid")
 			.setParameter("pid", cart.getProduct().getPid())
 			.executeUpdate();

@@ -4,8 +4,6 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import neu.edu.coe.dao.AddressDao;
 import neu.edu.coe.dao.CartDao;
-import neu.edu.coe.dao.CategoryDao;
 import neu.edu.coe.dao.OrderDao;
 import neu.edu.coe.dao.OrderItemDao;
-import neu.edu.coe.dao.ProductDao;
-import neu.edu.coe.dao.SmellDao;
 import neu.edu.coe.dao.UserDao;
 import neu.edu.coe.model.Address;
 import neu.edu.coe.model.Order;

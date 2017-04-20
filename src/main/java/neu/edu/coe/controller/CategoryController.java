@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,26 +14,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import neu.edu.coe.dao.AddressDao;
-import neu.edu.coe.dao.CartDao;
+
 import neu.edu.coe.dao.CategoryDao;
-import neu.edu.coe.dao.ProductDao;
-import neu.edu.coe.dao.UserDao;
 import neu.edu.coe.model.Category;
-import neu.edu.coe.service.CategoryService;
+
 
 @Controller
 @RequestMapping(value = "/category")
 public class CategoryController {
-	@Autowired
-	private CategoryService categoryService;
+	
 	
 	@Autowired
 	CategoryDao categoryDao;
 	
 	@RequestMapping(value ="/showcategory", method = RequestMethod.GET)
 	public String showCategory(Model model) {
-		List<Category> categories = categoryService.getCurrent();
+		List<Category> categories = categoryDao.getCategorys();
 		model.addAttribute("categories", categories);
 		return "category";
 	}
@@ -50,7 +44,7 @@ public class CategoryController {
 		String cname=request.getParameter("cname");
 		Category newCategory = new Category(cname);
 		categoryDao.insert(newCategory);
-		List<Category> categories = categoryService.getCurrent();
+		List<Category> categories = categoryDao.getCategorys();
 		model.addAttribute("categories", categories);
 		return "category";
 	}
@@ -66,7 +60,7 @@ public class CategoryController {
 	public String categoryupdated(@Valid @ModelAttribute("category") Category category, HttpServletRequest request, Model model) throws ClassNotFoundException, SQLException{
 		System.out.println(category);
 		categoryDao.Update(category);
-		List<Category> categories = categoryService.getCurrent();
+		List<Category> categories = categoryDao.getCategorys();
 		model.addAttribute("categories", categories);
 		return "category";
 	}
@@ -76,7 +70,7 @@ public class CategoryController {
 	public String categorydeleted(@PathVariable int categoryId, HttpServletRequest request, Model model){
 		Category deleteCategory = categoryDao.findCategoryById(categoryId);
 		categoryDao.delete(deleteCategory);
-		List<Category> categories = categoryService.getCurrent();
+		List<Category> categories = categoryDao.getCategorys();
 		model.addAttribute("categories", categories);
 		return "category";
 	}

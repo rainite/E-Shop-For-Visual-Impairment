@@ -44,7 +44,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td>${cart.product.pid}</td>
+								<td>${cart.product.pname}</td>
 								<td>${cart.quantity}</td>
 								<td><a
 									href="<c:url value='/cart/${cart.product.pid}/delete'/>">Delete</a></td>
