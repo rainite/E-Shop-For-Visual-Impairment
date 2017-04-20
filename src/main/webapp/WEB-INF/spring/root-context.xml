@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd ">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean id="userDAO" class="neu.edu.coe.dao.UserDao">
+	</bean>
+	<bean id="productDao" class="neu.edu.coe.dao.ProductDao">
+	</bean>
+	<bean id="categoryDao" class="neu.edu.coe.dao.CategoryDao">
+	</bean>
+	<bean id="addressDao" class="neu.edu.coe.dao.AddressDao">
+	</bean>
+	<bean id="orderDao" class="neu.edu.coe.dao.OrderDao">
+	</bean>
+	<bean id="cartDao" class="neu.edu.coe.dao.CartDao">
+	</bean>
+	<bean id="orderItemDao" class="neu.edu.coe.dao.OrderItemDao">
+	</bean>
+	<bean id="commentDao" class="neu.edu.coe.dao.CommentDao">
+	</bean>
+	<bean id="smellDao" class="neu.edu.coe.dao.SmellDao">
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="5000000" />
+	</bean>
+	
+	
+		
+<!-- 	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="url" value="jdbc:mysql://localhost:3306/E-Shop"></property>
+	<property name="username" value="root"></property>
+	<property name="password" value="root"></property>
+	</bean>
+	 -->
+	
+	
+	
+</beans>
