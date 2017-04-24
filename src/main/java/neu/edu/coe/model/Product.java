@@ -8,10 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -33,9 +33,9 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "smellid")
 	private Smell smell;
-	@Lob
-	private CommonsMultipartFile image;
-
+	@Transient
+	private CommonsMultipartFile imageFile;
+	private String image;
 //	@OneToOne(cascade = CascadeType.ALL)
 //	@PrimaryKeyJoinColumn
 //	private Feeling productFeeling;
@@ -50,7 +50,7 @@ public class Product {
 		// TODO Auto-generated constructor stub
 		this.pname = pname;
 		this.price = price;
-	//	this.image = image;
+	//	this.image = imageFile;
 		this.pdesc = pdesc;
 		this.is_hot = is_hot;
 		this.pdate = pdate;
@@ -60,7 +60,7 @@ public class Product {
 		this.pid=pid;
 		this.pname = pname;
 		this.price = price;
-//		this.image = image;
+//		this.image = imageFile;
 		this.pdesc = pdesc;
 		this.is_hot = is_hot;
 		this.pdate = pdate;
@@ -147,12 +147,24 @@ public class Product {
 	}
 	
 	
-	public CommonsMultipartFile getImage() {
+	public CommonsMultipartFile getImageFile() {
+		return imageFile;
+	}
+
+
+	public void setImageFile(CommonsMultipartFile image) {
+		this.imageFile = image;
+	}
+	
+	
+
+
+	public String getImage() {
 		return image;
 	}
 
 
-	public void setImage(CommonsMultipartFile image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -160,7 +172,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [pid=" + pid + ", pname=" + pname + ", price=" + price + ", pdesc=" + pdesc + ", is_hot="
-				+ is_hot + ", pdate=" + pdate + ", category=" + category + ", smell=" + smell + ", image=" + image
+				+ is_hot + ", pdate=" + pdate + ", category=" + category + ", smell=" + smell + ", imageFile=" + imageFile
 				+ "]";
 	}
 

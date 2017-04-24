@@ -1,12 +1,15 @@
 package neu.edu.coe.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,19 +94,53 @@ public class ProductController {
 		System.out.println(productId);
 		Product product = productDao.findById(productId);
 		model.addAttribute("product", product);
+		
 		return "editProduct";
 		
 	}
 
-	@RequestMapping(value = "/updated", method = RequestMethod.POST)
-	public String productUpdated(@Valid @ModelAttribute("product") Product product, Model model) throws IllegalStateException, IOException {
+	@RequestMapping(value = "/{productId}/edit", method = RequestMethod.POST)
+	public String productUpdated(@PathVariable int productId, @Valid @ModelAttribute("product") Product product, Model model, HttpServletRequest request) throws IllegalStateException, IOException {
 		System.out.println("*** SUBMITTED");
-		productDao.update(product);
+		Product oldProduct = productDao.findById(productId);
+		String filename = "";
+		ServletContext servletContext = request.getSession().getServletContext();
+		int begin = oldProduct.getImage().lastIndexOf("/");
+		System.out.println("begin = " + begin);
+		if(begin != -1){
+			filename = oldProduct.getImage().substring(begin+1,oldProduct.getImage().length());
+			System.out.println("Old Filename = " + filename);
+			//getName()
+		}//the new one isn't the old image
+		
+		String uploadFilename = product.getImageFile().getOriginalFilename();
+		System.out.println("New Filename = " + uploadFilename);
+		if(filename != uploadFilename && !"".equals(uploadFilename)){
+			//get path
+			String path = servletContext.getRealPath("/resources/1");
+			
+			System.out.println("Write Real Path = " + path);
+			try {
+				System.out.println("Start writting file");
+				FileUtils.writeByteArrayToFile(new File(path,uploadFilename), product.getImageFile().getBytes());
+				System.out.println("Writting done! ");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//reset image path
+			product.setImage("/resources/1/"+uploadFilename);		
+			path = request.getSession().getServletContext().getRealPath("/resources/1"+oldProduct.getImage());
+			System.out.println("Old file path: " + path);
+			File file = new File(path);
+			System.out.println("Start deleting old file");
+			file.delete();
+		}
+		
 		List<Product> plist = productDao.getProducts();
 		model.addAttribute("plist", plist);
 		List<Category> categories = categoryDao.getCategorys();
 		model.addAttribute("categories", categories);
-		product.getImage().transferTo(new java.io.File("/Users/Celestial/Desktop/", "file.jpg"));
+		productDao.update(product);
 		System.out.println("*** DONE");
 		return "products";
 	}
@@ -187,5 +224,19 @@ public class ProductController {
 		model.addAttribute("product", product);
 		return "viewProduct";
 	}
-
+	
+//image servlet
+	
+//	@RequestMapping(value = "/showImage", method = RequestMethod.GET ,produces = MediaType.IMAGE_JPEG_VALUE)
+//	public byte[] testphoto(@PathVariable int imageName, HttpServletRequest request) throws IOException {
+//		System.out.println("showImage called");
+//		ServletContext servletContext = request.getSession().getServletContext();
+//		String path = servletContext.getRealPath("/resources/1" + imageName);
+//		System.out.println("photoServlet Path" + path);
+//	    InputStream in = servletContext.getResourceAsStream(path);
+//	    return IOUtils.toByteArray(in);
+//	}
+//	
+	
+	
 }

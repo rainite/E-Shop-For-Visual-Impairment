@@ -22,7 +22,7 @@
 <body>
 	<div class="container">
 		<h1>Please edit product:</h1>
-		<form:form method="POST" action="/coe/product/updated"
+		<form:form method="POST" 
 			commandName="product" class="form-horizontal" enctype="multipart/form-data">
 			<form:input type="hidden" name="pid" path="pid" />
 			<form:input path="category.cid" name="categoryId" type="hidden" />
@@ -70,13 +70,16 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="image">Image:</label>
 				<div class="col-sm-10">
-					<form:input type="file" class="form-control" id="image"
-					name="image" path="image" />
+					<form:input type="file" class="form-control" id="imageFile"
+					name="imageFile" path="imageFile" />
 				</div>
 			</div>
 			
 			<center><input type="submit" value="Confirm" class="btn btn-primary"></center>
 		</form:form>
+		<c:if test="${product.image!=null&&product.image!=''}">
+          	<img src="${pageContext.request.contextPath}${product.image}" width="60" height="60"/>
+        </c:if>
 	</div>
 </body>
 </html>

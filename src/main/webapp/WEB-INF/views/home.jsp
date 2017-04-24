@@ -36,9 +36,10 @@
 			<form method="get" action="<c:url value="/search"/>" target="_parent"
 				class="form-inline">
 				<input id="input" type="text" name="desc" class="form-control"
-					size="50" /> &nbsp;&nbsp; <input type="submit" name="button"
+					size="50" /> &nbsp;&nbsp; 
+				<input type="submit" name="button"
 					value="Search" id="Search" class="btn btn-primary" class="button" />
-				<!--  <input type="submit" name="button"
+			<!--<input type="submit" name="button"
 						class="btn btn-primary"	value="ClearSearch" id="ClearSearch" class="button" /> -->
 			</form>
 			<div class="pull-right">
