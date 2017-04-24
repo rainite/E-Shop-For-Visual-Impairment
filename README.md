@@ -12,6 +12,6 @@ Apr_20.2017
 
 Version_3 
 
-Now image be uploaded and parsed correctly.
+Now image can be uploaded and parsed correctly.
 
 Apr_24.2017
